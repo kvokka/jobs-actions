@@ -1,14 +1,19 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
-ARG RUNNER_VERSION=2.319.1
+ARG RUNNER_VERSION=2.336.0
 ARG TARGETARCH=x64
+
+ARG TZ=Asia/Bangkok
+ENV TZ=${TZ}
 
 ENV DEBIAN_FRONTEND=noninteractive \
     RUNNER_ALLOW_RUNASROOT=1 \
     LANG=C.UTF-8
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN add-apt-repository -y ppa:jdxcode/mise && \
+  apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
+        build-essential \
         curl \
         git \
         git-lfs \
@@ -27,6 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         wget \
         xz-utils \
         zip \
+        mise \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash runner \
