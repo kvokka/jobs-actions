@@ -19,7 +19,7 @@ RUN apt update && apt install -y extrepo && extrepo enable mise && \
         git-lfs \
         gnupg \
         jq \
-        libicu70 \
+        libicu74 \
         locales \
         lsb-release \
         openssh-client \
