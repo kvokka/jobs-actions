@@ -10,8 +10,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RUNNER_ALLOW_RUNASROOT=1 \
     LANG=C.UTF-8
 
-RUN add-apt-repository -y ppa:jdxcode/mise && \
-  apt-get update && apt-get install -y --no-install-recommends \
+RUN apt install -y extrepo && extrepo enable mise && \
+  apt update && apt install -y --no-install-recommends \
         ca-certificates \
         build-essential \
         curl \
