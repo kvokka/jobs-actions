@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RUNNER_ALLOW_RUNASROOT=1 \
     LANG=C.UTF-8
 
-RUN apt install -y extrepo && extrepo enable mise && \
+RUN apt update && apt install -y extrepo && extrepo enable mise && \
   apt update && apt install -y --no-install-recommends \
         ca-certificates \
         build-essential \
