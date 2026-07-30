@@ -14,12 +14,13 @@ RUN apt-get update && apt-get install -y extrepo --no-install-recommends && extr
     apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     build-essential \
+    bubblewrap \
     curl \
     git \
     git-lfs \
     gnupg \
     jq \
-    libicu78 \
+    libicu74 \
     locales \
     lsb-release \
     openssh-client \
@@ -29,6 +30,7 @@ RUN apt-get update && apt-get install -y extrepo --no-install-recommends && extr
     wget \
     xz-utils \
     zip \
+    zsh \
     mise \
     && rm -rf /var/lib/apt/lists/*
 
@@ -47,7 +49,7 @@ RUN curl -fsSL -o /tmp/runner.tar.gz \
     && sudo ./bin/installdependencies.sh \
     && sudo rm -rf /var/lib/apt/lists/*
 
-RUN "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply --force --purge-binary kvokka
+RUN sh -c "cd $HOME && $(curl -fsLS get.chezmoi.io/lb)" -- init --apply --force --purge-binary kvokka
 
 COPY --chown=runner:runner entrypoint.sh /entrypoint.sh
 RUN sudo chmod +x /entrypoint.sh
